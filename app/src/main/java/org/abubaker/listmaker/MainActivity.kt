@@ -49,20 +49,35 @@ class MainActivity : AppCompatActivity() {
 
     // showCreateListDialog()
     private fun showCreateListDialog() {
+
+        // Retrieving values from @res/values/strings.xml
         val dialogTitle = getString(R.string.name_of_list)
         val createButtonTitle = getString(R.string.create_list)
 
+        // Dialog Title
         val builder = AlertDialog.Builder(this)
+
+        // Inserting a inputField to collect data from the user
         val listTitleEditText = EditText(this)
+
+        // Defining the TYPE of inputField so proper KEYBOARD can be shown
         listTitleEditText.inputType = InputType.TYPE_CLASS_TEXT
 
+        // Implement Dialog Title
         builder.setTitle(dialogTitle)
+
+        // Implement InputField
         builder.setView(listTitleEditText)
 
+        // onClick Listener for createButtonTitle
         builder.setPositiveButton(createButtonTitle) { dialog, _ ->
+
+            // We will later on add code here to preserve user's submitted data.
             dialog.dismiss()
+
         }
 
+        // Initialize the Dialog
         builder.create().show()
     }
 
