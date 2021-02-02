@@ -20,7 +20,8 @@ class ListSelectionRecyclerViewAdapter(private val lists: ArrayList<TaskList>) :
     // onBind - UI components through ViewHolder
     override fun onBindViewHolder(holder: ListSelectionViewHolder, position: Int) {
         holder.listPosition.text = (position + 1).toString()
-        holder.listTitle.text = lists.get(position).name
+        holder.listTitle.text = lists[position].name
+        // holder.listTitle.text = lists.get(position).name | replaced with indexing operation
     }
 
     // Total items ?
@@ -34,6 +35,8 @@ class ListSelectionRecyclerViewAdapter(private val lists: ArrayList<TaskList>) :
         // Update the ArrayList with the new item provided by the user
         lists.add(list)
 
+        // We are informing the Adapter that we have updated the data source (ArrayList),
+        // so it can update the RecyclerView.
         notifyItemInserted(lists.size - 1)
     }
 
