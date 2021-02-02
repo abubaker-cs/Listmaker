@@ -16,6 +16,9 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var listsRecyclerView: RecyclerView
 
+    // This will hold the ListDataManager
+    val listDataManager: ListDataManager = ListDataManager(this)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -26,9 +29,11 @@ class MainActivity : AppCompatActivity() {
             showCreateListDialog()
         }
 
+        val lists = listDataManager.readLists()
         listsRecyclerView = findViewById(R.id.lists_recyclerview)
         listsRecyclerView.layoutManager = LinearLayoutManager(this)
-        listsRecyclerView.adapter = ListSelectionRecyclerViewAdapter()
+
+        listsRecyclerView.adapter = ListSelectionRecyclerViewAdapter(lists)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -71,6 +76,12 @@ class MainActivity : AppCompatActivity() {
 
         // onClick Listener for createButtonTitle
         builder.setPositiveButton(createButtonTitle) { dialog, _ ->
+
+            val list = TaskList(listTitleEditText.text.toString())
+            listDataManager.saveList(list)
+
+            val recyclerAdapter = listsRecyclerView.adapter as ListSelectionRecyclerViewAdapter
+            recyclerAdapter.addList(list)
 
             // We will later on add code here to preserve user's submitted data.
             dialog.dismiss()
