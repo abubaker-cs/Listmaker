@@ -7,37 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 class ListSelectionRecyclerViewAdapter(private val lists: ArrayList<TaskList>) :
     RecyclerView.Adapter<ListSelectionViewHolder>() {
 
-    val listTitles = arrayOf(
-        "Shopping List",
-        "Chores",
-        "Android Tutorials",
-        "Ann Chovey",
-        "Barry Cuda",
-        "Barry Mundy",
-        "John Dory",
-        "Murray Cod",
-        "Coral Trout",
-        "Red Salmon",
-        "Tiger Prawn",
-        "Rock Cod",
-        "Rock Lobster",
-        "Ray Manta",
-        "E.L. Moray",
-        "Hazel Nutt",
-        "Chris P. Bacon",
-        "Chris P. Creem",
-        "Marsha Mellow",
-        "Barb Akew",
-        "Pete Tsar",
-        "Marge Areen",
-        "Violet Crumb-Ball",
-        "Rosemary Lamb",
-        "Cesar Salad",
-        "Frank Furter",
-        "Polly N. Satcherayted",
-        "Des E. Kaytedcoconut"
-    )
-
     // onCreate
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListSelectionViewHolder {
 
@@ -62,6 +31,7 @@ class ListSelectionRecyclerViewAdapter(private val lists: ArrayList<TaskList>) :
     // addList()
     fun addList(list: TaskList) {
 
+        // Update the ArrayList with the new item provided by the user
         lists.add(list)
 
         notifyItemInserted(lists.size - 1)
