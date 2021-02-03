@@ -4,7 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-class ListItemsRecyclerViewAdapter(var list: TaskList) : RecyclerView.Adapter<ListItemViewHolder> {
+class ListItemsRecyclerViewAdapter(var list: TaskList) :
+    RecyclerView.Adapter<ListItemViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListItemViewHolder {
         val view =
@@ -14,6 +15,7 @@ class ListItemsRecyclerViewAdapter(var list: TaskList) : RecyclerView.Adapter<Li
 
     override fun onBindViewHolder(holder: ListItemViewHolder, position: Int) {
 
+        // We are binding to a specific task from the list depending on the position of the viewHolder
         holder.taskTextView.text = list.tasks[position]
 
     }
