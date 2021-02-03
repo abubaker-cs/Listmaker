@@ -82,8 +82,9 @@ class ListDetailActivity : AppCompatActivity() {
 
                 // After adding new tasks, we are closing the AlertDialog by dismissing it
                 dialog.dismiss()
-
             }
+            .create()
+            .show()
 
     }
 
