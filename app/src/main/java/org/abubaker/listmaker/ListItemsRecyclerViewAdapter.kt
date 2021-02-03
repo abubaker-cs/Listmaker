@@ -15,7 +15,8 @@ class ListItemsRecyclerViewAdapter(var list: TaskList) :
 
     override fun onBindViewHolder(holder: ListItemViewHolder, position: Int) {
 
-        // We are binding to a specific task from the list depending on the position of the viewHolder
+        // Using the reference from ListITemViewHolder.kt file we are binding a specific task to
+        // the list generated using #id: textview_task depending on the position of the viewHolder
         holder.taskTextView.text = list.tasks[position]
 
     }
