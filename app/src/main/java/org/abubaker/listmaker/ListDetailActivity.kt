@@ -58,24 +58,29 @@ class ListDetailActivity : AppCompatActivity() {
         // Defining the TYPE of inputField so proper KEYBOARD can be shown
         taskEditText.inputType = InputType.TYPE_CLASS_TEXT
 
+        // Setup for AlertDialog
         AlertDialog.Builder(this)
             .setTitle(R.string.task_to_add)
             .setView(taskEditText)
             .setPositiveButton(R.string.add_task) { dialog, _ ->
 
+                // We are fetching user's provided data throught the textField
                 val task = taskEditText.text.toString()
+
+                // Retrieved data is being used to create a new task
                 list.tasks.add(task)
 
+                // We are informing the Adapter that a new item has been added
+                // This will enforce RecyclerView to update its rows
                 val recyclerAdapter =
                     listItemsRecyclerView.adapter as ListSelectionRecyclerViewAdapter
 
                 recyclerAdapter.notifyItemInserted(list.tasks.size - 1)
 
-                // We will later on add code here to preserve user's submitted data.
+                // After adding new tasks, we are closing the AlertDialog by dismissing it
                 dialog.dismiss()
 
             }
-
 
     }
 
