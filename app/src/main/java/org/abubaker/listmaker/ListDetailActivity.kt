@@ -75,6 +75,7 @@ class ListDetailActivity : AppCompatActivity() {
                 val recyclerAdapter =
                     listItemsRecyclerView.adapter as ListSelectionRecyclerViewAdapter
 
+                // TODO add comment for (list.tasks.size - 1)
                 recyclerAdapter.notifyItemInserted(list.tasks.size - 1)
 
                 // After adding new tasks, we are closing the AlertDialog by dismissing it
