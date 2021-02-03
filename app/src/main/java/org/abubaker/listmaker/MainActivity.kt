@@ -13,7 +13,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(),
+    ListSelectionRecyclerViewAdapter.ListSelectionRecyclerViewClickListener {
 
     lateinit var listsRecyclerView: RecyclerView
 
@@ -34,7 +35,8 @@ class MainActivity : AppCompatActivity() {
         listsRecyclerView = findViewById(R.id.lists_recyclerview)
         listsRecyclerView.layoutManager = LinearLayoutManager(this)
 
-        listsRecyclerView.adapter = ListSelectionRecyclerViewAdapter(lists)
+        // We are now passing in the activity as a listener
+        listsRecyclerView.adapter = ListSelectionRecyclerViewAdapter(lists, this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -87,13 +89,16 @@ class MainActivity : AppCompatActivity() {
             // We will later on add code here to preserve user's submitted data.
             dialog.dismiss()
 
+            // Forward the "new list" to the new Activity using Intent (Bundle)
+            showListDetail(list)
+
         }
 
         // Initialize the Dialog
         builder.create().show()
     }
 
-    // Prepare Intent
+    // Prepare Intent : Markup for sending DATA through Bundle
     private fun showListDetail(list: TaskList) {
 
         // We are providing CURRENT context, and defining the Activity where we will like to navigate
@@ -107,4 +112,14 @@ class MainActivity : AppCompatActivity() {
         startActivity(listDetailIntent)
     }
 
+    // We are using "companion object" so our data can be placed inside the Bundle
+    companion object {
+        const val INTENT_LIST_KEY = "list"
+    }
+
+    // Confirming to the newly assigned interface
+    // ListSelectionRecyclerViewAdapter.ListSelectionRecyclerViewClickListener in the MainActivity
+    override fun listItemClicked(list: TaskList) {
+        showListDetail(list)
+    }
 }

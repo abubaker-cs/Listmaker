@@ -31,10 +31,10 @@ class TaskList constructor(
     // we will instead create a "companion object" in kotlin and override appropriate functions.
     companion object CREATOR : Parcelable.Creator<TaskList> {
 
-        //
+        // Receiver: our source
         override fun createFromParcel(source: Parcel): TaskList = TaskList(source)
 
-        //
+        // Sender: new Array
         override fun newArray(size: Int): Array<TaskList?> = arrayOfNulls(size)
 
     }
