@@ -1,5 +1,6 @@
 package org.abubaker.listmaker
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
@@ -109,17 +110,36 @@ class MainActivity : AppCompatActivity(),
         listDetailIntent.putExtra(INTENT_LIST_KEY, list)
 
         // We are asking to now move to the targeted Activity, i.e. ListDetailActivity
-        startActivity(listDetailIntent)
+        // startActivity(listDetailIntent)
+
+        startActivityForResult(listDetailIntent, LIST_DETAIL_REQUEST_CODE)
     }
 
     // We are using "companion object" so our data can be placed inside the Bundle
     companion object {
         const val INTENT_LIST_KEY = "list"
+        const val LIST_DETAIL_REQUEST_CODE = 123
     }
 
     // Confirming to the newly assigned interface
     // ListSelectionRecyclerViewAdapter.ListSelectionRecyclerViewClickListener in the MainActivity
     override fun listItemClicked(list: TaskList) {
         showListDetail(list)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == LIST_DETAIL_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            data?.let {
+                listDataManager.saveList(data.getParcelableExtra<TaskList>(INTENT_LIST_KEY) as TaskList)
+                updateLists()
+            }
+        }
+    }
+
+    private fun updateLists() {
+        val lists = listDataManager.readLists()
+        listsRecyclerView.adapter = ListSelectionRecyclerViewAdapter(lists, this)
     }
 }
