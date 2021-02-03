@@ -13,16 +13,16 @@ class ListItemsRecyclerViewAdapter(var list: TaskList) :
         return ListItemViewHolder(view)
     }
 
+    override fun getItemCount(): Int {
+        return list.tasks.size
+    }
+
     override fun onBindViewHolder(holder: ListItemViewHolder, position: Int) {
 
         // Using the reference from ListITemViewHolder.kt file we are binding a specific task to
         // the list generated using #id: textview_task depending on the position of the viewHolder
         holder.taskTextView.text = list.tasks[position]
 
-    }
-
-    override fun getItemCount(): Int {
-        return list.tasks.size
     }
 
 

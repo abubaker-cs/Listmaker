@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
@@ -14,17 +13,21 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
+
 class MainActivity : AppCompatActivity(),
     ListSelectionRecyclerViewAdapter.ListSelectionRecyclerViewClickListener {
-
-    lateinit var listsRecyclerView: RecyclerView
 
     // This will hold the ListDataManager
     val listDataManager: ListDataManager = ListDataManager(this)
 
+    lateinit var listsRecyclerView: RecyclerView
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_main)
+
         setSupportActionBar(findViewById(R.id.toolbar))
 
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
@@ -115,12 +118,6 @@ class MainActivity : AppCompatActivity(),
         startActivityForResult(listDetailIntent, LIST_DETAIL_REQUEST_CODE)
     }
 
-    // We are using "companion object" so our data can be placed inside the Bundle
-    companion object {
-        const val INTENT_LIST_KEY = "list"
-        const val LIST_DETAIL_REQUEST_CODE = 123
-    }
-
     // Confirming to the newly assigned interface
     // ListSelectionRecyclerViewAdapter.ListSelectionRecyclerViewClickListener in the MainActivity
     override fun listItemClicked(list: TaskList) {
@@ -132,7 +129,7 @@ class MainActivity : AppCompatActivity(),
 
         if (requestCode == LIST_DETAIL_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             data?.let {
-                listDataManager.saveList(data.getParcelableExtra<TaskList>(INTENT_LIST_KEY) as TaskList)
+                listDataManager.saveList(data.getParcelableExtra(INTENT_LIST_KEY) as TaskList)
                 updateLists()
             }
         }
@@ -141,5 +138,11 @@ class MainActivity : AppCompatActivity(),
     private fun updateLists() {
         val lists = listDataManager.readLists()
         listsRecyclerView.adapter = ListSelectionRecyclerViewAdapter(lists, this)
+    }
+
+    // We are using "companion object" so our data can be placed inside the Bundle
+    companion object {
+        const val INTENT_LIST_KEY = "list"
+        const val LIST_DETAIL_REQUEST_CODE = 123
     }
 }

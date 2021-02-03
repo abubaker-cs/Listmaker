@@ -2,25 +2,25 @@ package org.abubaker.listmaker
 
 import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.InputType
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ListDetailActivity : AppCompatActivity() {
 
-    // It will store the data received through Bundle() from the MainActivity
-    lateinit var list: TaskList
+    //
+    lateinit var addTaskButton: FloatingActionButton
 
     // It will be a reference to our RecyclerView in our XML file
     lateinit var listItemsRecyclerView: RecyclerView
 
-    //
-    lateinit var addTaskButton: FloatingActionButton
+    // It will store the data received through Bundle() from the MainActivity
+    lateinit var list: TaskList
 
     // onCreate()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,7 +30,7 @@ class ListDetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_list_detail)
 
         // By using the KEY we are asking the Bundle to provide us the variable and store it in the local object: "list"
-        list = intent.getParcelableExtra<TaskList>(MainActivity.INTENT_LIST_KEY) as TaskList
+        list = intent.getParcelableExtra(MainActivity.INTENT_LIST_KEY) as TaskList
 
         // We will be using the "name" variable form the Bundle as the TITLE of our new Activity in the appbar
         title = list.name

@@ -4,15 +4,13 @@ import android.os.Parcel
 import android.os.Parcelable
 
 // This is the model for the list, which we will be using throughout the app
-class TaskList constructor(
-    val name: String,
-    val tasks: ArrayList<String> = ArrayList()
-) : Parcelable {
+class TaskList constructor(val name: String, val tasks: ArrayList<String> = ArrayList()) : Parcelable {
 
     // Reading from the Parcel
     // Read received data, and create a local ArrayList<> of Strings
     constructor(source: Parcel) : this(
-        source.readString()!!, source.createStringArrayList()!!
+        source.readString()!!,
+        source.createStringArrayList()!!
     )
 
     //

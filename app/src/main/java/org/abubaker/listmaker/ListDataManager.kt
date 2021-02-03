@@ -6,7 +6,7 @@ import androidx.preference.PreferenceManager
 /**
  * This class will manage the LIST which ListMaker will create
  */
-@Suppress("UNCHECKED_CAST") // avoids providing HashSet<*>
+// @Suppress("UNCHECKED_CAST") // avoids providing HashSet<*>
 class ListDataManager(private val context: Context) {
 
     // saveLists
