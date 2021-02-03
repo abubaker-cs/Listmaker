@@ -1,5 +1,6 @@
 package org.abubaker.listmaker
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -90,6 +91,20 @@ class MainActivity : AppCompatActivity() {
 
         // Initialize the Dialog
         builder.create().show()
+    }
+
+    // Prepare Intent
+    private fun showListDetail(list: TaskList) {
+
+        // We are providing CURRENT context, and defining the Activity where we will like to navigate
+        val listDetailIntent = Intent(this, ListDetailActivity::class.java)
+
+        // Receiving Activity will be able to reference our provided data using INTENT_LIST_KEY
+        // list will be the ArrayList<> that we will forward
+        listDetailIntent.putExtra(INTENT_LIST_KEY, list)
+
+        // We are asking to now move to the targeted Activity, i.e. ListDetailActivity
+        startActivity(listDetailIntent)
     }
 
 }
